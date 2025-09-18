@@ -2,12 +2,15 @@ const express = require('express');
 const morgan = require('morgan')
 const mongoose = require('mongoose');
 const blogroutes = require('./routes/blogRoutes');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 // express app( invokation )
 const app = express();
 
 // connect to database
-const dbURI = 'mongodb+srv://jammy-bae:bae142003@developercluster.4ouckpz.mongodb.net/node-tuts?retryWrites=true&w=majority';
+const dbURI = process.env.MONGODB_URI;
 mongoose.connect(dbURI)
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
